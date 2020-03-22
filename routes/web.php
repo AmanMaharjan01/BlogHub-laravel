@@ -18,6 +18,8 @@ Route::get('/about', function () {
 
 
 Route::get('/post', 'articlesController@display');
+Route::get('/post/{id}', 'articlesController@show');
+Route::get('/post/my/{id}', 'articlesController@myarticle');
 
 Route::get('/contact', function () {
     return view('contact');
@@ -26,15 +28,6 @@ Route::get('/contact', function () {
 Route::get('/', 'articlesController@index');
 Route::get('/create/add','articlesController@create');
 Route::post('/create','articlesController@store');
-
-Auth::routes();
-
-Route::get('/home', 'HomeController@index')->name('home');
-
-
-Auth::routes();
-
-Route::get('/home', 'HomeController@index')->name('home');
 
 Auth::routes();
 

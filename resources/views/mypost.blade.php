@@ -6,7 +6,7 @@
 <br>
 <div class="container">
   @foreach($posts as $post)
-  <header class="masthead" style="background-image: url('img/bg.jpg'); height: 400px; margin: 5px;">
+  <header class="masthead" style="background-image: url('/img/bg.jpg'); height: 400px; margin: 5px;">
     <div class="overlay"></div>
     <div class="container">
       <div class="row">
@@ -25,7 +25,6 @@
   </header>
   @endforeach
   </article>
-     {{$posts->links()}}
  </div>
   <hr>
 

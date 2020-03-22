@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Blog;
+use App\User;
 
 class articlesController extends Controller
 {
@@ -14,12 +15,12 @@ class articlesController extends Controller
      */
     public function display()
     {
-        $art = Blog::paginate(4);
+        $art = Blog::latest()->paginate(4);
         return view('post',['posts' => $art]);
     }
     public function index()
     {
-        return view('home');
+        return view('frontpage');
     }
 
     /**
@@ -48,7 +49,7 @@ class articlesController extends Controller
 
         $article->save();
 
-        return redirect('/');
+        return redirect('/home');
     }
 
     /**
@@ -59,7 +60,14 @@ class articlesController extends Controller
      */
     public function show($id)
     {
-        //
+        $article = Blog::find($id);
+        return view('view-article',['posts' => $article]);
+    }
+
+    public function myarticle($id)
+    {
+         $article = Blog::where('user_id', $id)->latest()->paginate(5);
+         return view('mypost',['posts' => $article]);
     }
 
     /**
