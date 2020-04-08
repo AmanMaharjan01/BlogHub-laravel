@@ -39,8 +39,13 @@ class articlesController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store()
     {
+        request()->validate([
+           'title' => 'required',
+           'subtitle' => 'required',
+        ]);
+
         $article = new Blog;
         $article->title = request('title');
         $article->subtitle = request('subtitle');
@@ -49,7 +54,7 @@ class articlesController extends Controller
 
         $article->save();
 
-        return redirect('/home');
+        return redirect('/post');
     }
 
     /**
@@ -78,7 +83,8 @@ class articlesController extends Controller
      */
     public function edit($id)
     {
-        //
+      $article = Blog::find($id);
+      return view('updatearticle',['posts' => $article]);
     }
 
     /**
@@ -88,9 +94,23 @@ class articlesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Blog $id)
     {
-        //
+        request()->validate([
+           'title' => 'required',
+           'subtitle' => 'required',
+            'body' => 'required' 
+        ]);
+
+        $article = Blog::find($id);
+
+        $article->title = request('title');
+        $article->subtitle = request('subtitle');
+        $article->body= request('article');
+
+        $article->save();
+
+        return redirect('/post');
     }
 
     /**
@@ -101,6 +121,17 @@ class articlesController extends Controller
      */
     public function destroy($id)
     {
-        //
+        Blog::where('id',$id)->delete();
+
+        return redirect('/post/my/$id');
+    }
+
+    protected function validateArticle()
+    {
+        return request()->validate([
+           'title' => 'required',
+           'subtitle' => 'required',
+            'body' => 'required' 
+        ]);
     }
 }

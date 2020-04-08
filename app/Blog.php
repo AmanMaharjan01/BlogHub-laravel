@@ -2,6 +2,9 @@
 
 namespace App;
 
+use App\User;
+use App\Comment;
+
 use Illuminate\Database\Eloquent\Model;
 
 class Blog extends Model
@@ -11,7 +14,13 @@ class Blog extends Model
 
     public function user () {
 
-    	return $this->belongsTo('App\User', 'user_id', 'id');
-
+    	return $this->belongsTo(User::class);
     }
+
+     public function comments () {
+
+    	return $this->hasMany(Comment::class);
+    }
+
+
 }

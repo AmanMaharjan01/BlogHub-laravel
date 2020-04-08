@@ -23,17 +23,30 @@
      <span class="article">
       {{$posts->body}}
      </span><br><br><hr>
-     <form>
+
+     <form method="POST" action="/addcomment/{{$posts->id}}">
+
+      @csrf
        <div class="form-group">
        <h5 for="comment">Add Comment</h5>
-      <textarea class="form-control rounded-0" name="article" id="comment"></textarea> 
+      <textarea class="form-control rounded-0" name="comment" id="comment"></textarea><br>
+      <div class="form-group">
+      <button type="submit" class="btn btn-warning text-white">Submit</button>
+      </div>
      </div>
      </form><hr>
+     
+     <h3>Comments</h3><hr>
      <div style="position: static; width: 100%; height: 300px;">
-     <h4>Recent Comments</h4>
-     <span style="margin-bottom: 10px;">
-       No Comments Yet
-     </span><br>
+      @foreach($posts->comments as $comment)
+           <img src="/images/an.jpg" width="50" height="50" style="border-radius: 50%;">
+           <span style="color: #4077e1; font-size: 19px;"><b>{{$comment->user->name}}</b></span>
+           <div style="margin: 0px;">
+           <span style="padding-left: 60px; font-size: 17px;">{{$comment->body}}</span><br><hr>
+           </div>
+       @endforeach
+
+
    </div>
   </div>
 

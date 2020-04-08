@@ -2,6 +2,8 @@
 
 namespace App;
 
+use App\Blog;
+
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -39,6 +41,11 @@ class User extends Authenticatable
 
     public function blogs()
     {
-        return $this->hasMany('App\Blog','user_id','id');
+        return $this->hasMany(Blog::class);
+    }
+
+     public function comments() {
+
+        return $this->hasMany(comment::class);
     }
 }

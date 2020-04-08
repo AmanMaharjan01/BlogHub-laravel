@@ -28,19 +28,4 @@ $factory->define(User::class, function (Faker $faker) {
         'remember_token' => Str::random(10),
     ];
 });
-$factory->define(Blog::class, function (Faker $faker) {
-    return [
-       'title' => $faker->word,
-       'body' => $faker->paragraph($nbSentences = 3, $variableNbSentences = true),
-       'user_id' => User::all()->random()->id,
-    ];
-});
 
-
-$factory->define(Comment::class, function (Faker $faker) {
-    return [
-       'body' => $faker->paragraph($nbSentences = 3, $variableNbSentences = true),
-       'blog_id' => Blog::all()->random()->id,
-       'user_id' => User::all()->random()->id
-    ];
-});
